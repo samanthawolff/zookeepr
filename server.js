@@ -6,6 +6,8 @@ const { animals } = require('./data/animals.json');
 const PORT = process.env.PORT || 3001;
 const app = express();
 
+app.use(express.static('public'));
+
 // parse incoming string or array data
 app.use(express.urlencoded({ extened: true}));
 // parse incoming JSON data
@@ -100,6 +102,11 @@ app.get('/api/animals/:id', (req, res) => {
     } else {
         res.send(404);
     }
+});
+
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
 
